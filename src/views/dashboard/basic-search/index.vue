@@ -1,7 +1,7 @@
 <template>
   <div>
     <iframe
-      src="http://124.222.237.67:8084/"
+      src="https://124.222.237.67"
       id="mobsf"
       frameborder="0"
       style="position: absolute"
