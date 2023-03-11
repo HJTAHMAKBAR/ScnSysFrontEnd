@@ -37,8 +37,17 @@ const dashboard: AppRouteModule = {
       component: () => import('/@/views/dashboard/basic-search/index.vue'),
       meta: {
         // affix: true,
-        frameSrc: 'http://124.222.237.67:8084/',
+        // frameSrc: 'http://124.222.237.67:8084/',
         title: t('routes.dashboard.basicSearch'),
+      },
+    },
+    {
+      path: 'docBasedSearch',
+      name: 'docBasedSearch',
+      component: () => import('/@/views/dashboard/document-based-search/index.vue'),
+      meta: {
+        // affix: true,
+        title: t('routes.dashboard.docBasedSearch'),
       },
     },
   ],

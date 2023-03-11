@@ -1,36 +1,29 @@
 <template>
-  <div>
-    <iframe
-      src="https://124.222.237.67"
-      id="mobsf"
-      frameborder="0"
-      style="position: absolute"
-    ></iframe>
-  </div>
+  <Card>
+    <iframe src="https://124.222.237.67" id="basicSearch"></iframe>
+  </Card>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {}
-    },
-    mounted() {
-      /**
-       * iframe-宽高自适应显示
-       */
-      function changeMobsfIframe() {
-        const mobsf = document.getElementById('mobsf')
-        const deviceWidth = document.body.clientWidth
-        const deviceHeight = document.body.clientHeight
-        mobsf.style.width = Number(deviceWidth) - 220 + 'px' //数字是页面布局宽度差值
-        mobsf.style.height = Number(deviceHeight) - 80 + 'px' //数字是页面布局高度差
-      }
+<script lang="ts" setup>
+  import { Card } from 'ant-design-vue'
+  import { onMounted } from 'vue'
 
-      changeMobsfIframe()
+  onMounted(() => {
+    /**
+     * iframe-宽高自适应显示
+     */
+    function changeBasicSearchIframe() {
+      const basicSearch = document.getElementById('basicSearch')
+      const deviceWidth = document.body.clientWidth
+      const deviceHeight = document.body.clientHeight
+      basicSearch.style.width = Number(deviceWidth) - 220 + 'px' //数字是页面布局宽度差值
+      basicSearch.style.height = Number(deviceHeight) - 80 + 'px' //数字是页面布局高度差
+    }
 
-      window.onresize = function () {
-        changeMobsfIframe()
-      }
-    },
-  }
+    changeBasicSearchIframe()
+
+    window.onresize = function () {
+      changeBasicSearchIframe()
+    }
+  })
 </script>

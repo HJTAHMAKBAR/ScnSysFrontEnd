@@ -2,7 +2,6 @@
 
 ```bash
 pnpm install
-
 ```
 
 - 运行
