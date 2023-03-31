@@ -4,5 +4,6 @@ export default {
   workbench: 'Workbench',
   analysis: 'Analysis',
   basicSearch: 'BasicSearch',
-  docBasedSearch: 'DocumentBasedSearch',
+  docBasedSearch: 'SingleDocumentBasedSearch',
+  mulDocBasedSearch: 'MultipleDocumentBasedSearch',
 }

@@ -4,5 +4,6 @@ export default {
   workbench: '工作台',
   analysis: '分析页',
   basicSearch: '基础搜索',
-  docBasedSearch: '文档检索',
+  docBasedSearch: '单文档检索',
+  mulDocBasedSearch: '多文档检索',
 }

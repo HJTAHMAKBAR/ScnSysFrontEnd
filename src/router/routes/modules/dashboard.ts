@@ -44,10 +44,19 @@ const dashboard: AppRouteModule = {
     {
       path: 'docBasedSearch',
       name: 'docBasedSearch',
-      component: () => import('/@/views/dashboard/document-based-search/index.vue'),
+      component: () => import('/@/views/dashboard/single-document-based-search/index.vue'),
       meta: {
         // affix: true,
         title: t('routes.dashboard.docBasedSearch'),
+      },
+    },
+    {
+      path: 'mulDocBasedSearch',
+      name: 'mulDocBasedSearch',
+      component: () => import('/@/views/dashboard/multiple-document-based-search/index.vue'),
+      meta: {
+        // affix: true,
+        title: t('routes.dashboard.mulDocBasedSearch'),
       },
     },
   ],
