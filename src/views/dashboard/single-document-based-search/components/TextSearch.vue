@@ -1,21 +1,30 @@
 <template>
   <div>
     <a-textarea
-      v-model:value="value"
+      v-model:value="inputText"
       placeholder="请输入要检索的文本"
       :auto-size="{ minRows: 10, maxRows: 20 }"
     />
+    <p></p>
+    <a-button type="primary" size="large" @click="onSubmit">一键检索</a-button>
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent, ref } from 'vue'
-  export default defineComponent({
-    setup() {
-      const value = ref<string>('')
-      return {
-        value,
-      }
-    },
+<script setup lang="ts">
+  import { ref } from 'vue'
+  import emitter from '/@/utils/bus.js'
+
+  export interface APT {
+    inputText: string
+  }
+
+  const inputText = ref('')
+  defineExpose({
+    inputText,
   })
+
+  function onSubmit() {
+    console.log('submit', inputText.value)
+    emitter.emit('textSearch', inputText.value)
+  }
 </script>

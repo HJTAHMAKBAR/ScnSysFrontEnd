@@ -11,7 +11,6 @@
     <p v-if="activeKey === 'tab2'">
       <FileSearch />
     </p>
-    <a-button type="primary" size="large" @click="onSubmit">一键检索</a-button>
   </Card>
 </template>
 <script lang="ts" setup>
@@ -35,9 +34,5 @@
 
   function onTabChange(key) {
     activeKey.value = key
-  }
-
-  function onSubmit() {
-    console.log('submit')
   }
 </script>
