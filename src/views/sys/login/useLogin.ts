@@ -1,3 +1,4 @@
+// @ts-ignore
 import type { ValidationRule } from 'ant-design-vue/lib/form/Form'
 import type { RuleObject } from 'ant-design-vue/lib/form/interface'
 import { ref, computed, unref, Ref } from 'vue'

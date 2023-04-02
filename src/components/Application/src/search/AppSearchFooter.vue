@@ -14,7 +14,7 @@
   import AppSearchKeyItem from './AppSearchKeyItem.vue'
   import { useDesign } from '/@/hooks/web/useDesign'
   import { useI18n } from '/@/hooks/web/useI18n'
-  const { prefixCls } = useDesign('app-search-footer')
+  const { prefixCls } = useDesign('app-core-footer')
   const { t } = useI18n()
 </script>
 <style lang="less" scoped>

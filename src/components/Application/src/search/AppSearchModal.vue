@@ -80,7 +80,7 @@
   const inputRef = ref<Nullable<HTMLElement>>(null)
 
   const { t } = useI18n()
-  const { prefixCls } = useDesign('app-search-modal')
+  const { prefixCls } = useDesign('app-core-modal')
   const [refs, setRefs] = useRefs()
   const { getIsMobile } = useAppInject()
 

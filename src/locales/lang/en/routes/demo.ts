@@ -173,7 +173,7 @@ export default {
     fetchTable: 'Remote loading',
     fixedColumn: 'Fixed column',
     customerCell: 'Custom column',
-    formTable: 'Open search',
+    formTable: 'Open core',
     useTable: 'UseTable',
     refTable: 'RefTable',
     multipleHeader: 'MultiLevel header',

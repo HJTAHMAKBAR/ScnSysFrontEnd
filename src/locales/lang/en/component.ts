@@ -1,7 +1,7 @@
 export default {
   app: {
-    searchNotData: 'No search results yet',
-    toSearch: 'to search',
+    searchNotData: 'No core results yet',
+    toSearch: 'to core',
     toNavigate: 'to navigate',
   },
   countdown: {
@@ -44,7 +44,7 @@ export default {
     copy: 'Copy icon successfully!',
   },
   menu: {
-    search: 'Menu search',
+    search: 'Menu core',
   },
   modal: {
     cancelText: 'Close',

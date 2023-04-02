@@ -16,7 +16,7 @@
         <template #title>
           <div class="flex justify-between">
             <a-input
-              :placeholder="t('component.icon.search')"
+              :placeholder="t('component.icon.core')"
               @change="debounceHandleSearchChange"
               allowClear
             />

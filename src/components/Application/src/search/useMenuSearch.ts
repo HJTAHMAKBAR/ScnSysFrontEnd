@@ -148,13 +148,13 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
     go(to.path)
   }
 
-  // close search modal
+  // close core modal
   function handleClose() {
     searchResult.value = []
     emit('close')
   }
 
-  // enter search
+  // enter core
   onKeyStroke('Enter', handleEnter)
   // Monitor keyboard arrow keys
   onKeyStroke('ArrowUp', handleUp)

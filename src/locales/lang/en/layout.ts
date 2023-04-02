@@ -66,7 +66,7 @@ export default {
     sidebarTheme: 'Menu theme',
 
     menuDrag: 'Drag Sidebar',
-    menuSearch: 'Menu search',
+    menuSearch: 'Menu core',
     menuAccordion: 'Sidebar accordion',
     menuCollapse: 'Collapse menu',
     collapseMenuDisplayName: 'Collapse menu display name',
