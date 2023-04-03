@@ -13,7 +13,6 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import emitter from '/@/utils/bus.js'
-  import { textExtract } from '/@/api/core/extract'
 
   export interface APT {
     inputText: string
@@ -25,8 +24,6 @@
   })
 
   function onSubmit() {
-    console.log('submit', inputText.value)
     emitter.emit('textSearch', inputText.value)
-    textExtract(inputText.value)
   }
 </script>
