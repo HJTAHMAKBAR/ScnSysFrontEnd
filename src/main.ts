@@ -2,8 +2,10 @@ import 'virtual:windi-base.css'
 import 'virtual:windi-components.css'
 import '/@/design/index.less'
 import 'virtual:windi-utilities.css'
+import 'ant-design-vue/dist/antd.css'
 // Register icon sprite
 import 'virtual:svg-icons-register'
+import Antd from 'ant-design-vue'
 import App from './App.vue'
 import { createApp } from 'vue'
 import { initAppConfigStore } from '/@/logics/initAppConfig'
@@ -58,7 +60,7 @@ async function bootstrap() {
   // https://next.router.vuejs.org/api/#isready
   // await router.isReady();
 
-  app.mount('#app')
+  app.use(Antd).mount('#app')
 }
 
 bootstrap()
