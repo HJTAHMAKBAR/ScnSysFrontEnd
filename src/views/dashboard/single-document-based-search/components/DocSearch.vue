@@ -18,6 +18,7 @@
   import { Card } from 'ant-design-vue'
   import TextSearch from './TextSearch.vue'
   import FileSearch from './FileSearch.vue'
+  import emitter from '/@/utils/bus.js'
 
   const activeKey = ref('tab1')
 
@@ -34,5 +35,6 @@
 
   function onTabChange(key) {
     activeKey.value = key
+    emitter.emit('clearList')
   }
 </script>

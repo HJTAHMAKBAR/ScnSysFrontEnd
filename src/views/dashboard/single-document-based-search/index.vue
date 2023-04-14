@@ -41,6 +41,12 @@
     })
   })
 
+  emitter.on('clearList', () => {
+    personList.value = []
+    countryList.value = []
+    cityList.value = []
+  })
+
   onUnmounted(() => {
     emitter.off('textSearch')
   })
