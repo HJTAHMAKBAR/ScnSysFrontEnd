@@ -24,6 +24,7 @@
   import { message } from 'ant-design-vue'
   import { defineComponent, ref } from 'vue'
   import type { UploadChangeParam } from 'ant-design-vue'
+  import emitter from '/@/utils/bus'
 
   export default defineComponent({
     components: {
@@ -37,6 +38,7 @@
         }
         if (status === 'done') {
           message.success(`${info.file.name} 文件上传成功.`)
+          emitter.emit('fileSearch', info.file.response.result)
         } else if (status === 'error') {
           message.error(`${info.file.name} 文件上传失败.`)
         }

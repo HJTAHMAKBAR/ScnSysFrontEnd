@@ -8,6 +8,8 @@
 <script lang="ts" setup>
   import { Card, Tag } from 'ant-design-vue'
   import { watch } from 'vue'
+  import emitter from '/@/utils/bus'
+
   const props = defineProps({
     loading: Boolean,
     list: Array,
@@ -23,5 +25,6 @@
   )
   function itemClick() {
     console.log('你好')
+    emitter.emit('entityClick', '你好')
   }
 </script>
