@@ -1,7 +1,7 @@
 <template>
-  <Card title="涉及城市" :loading="list.length === 0">
+  <Card title="涉及地址" :loading="loading">
     <div v-for="(item, index) in list" :key="index">
-      <Tag color="orange" style="margin-bottom: 10px" @click="itemClick">{{ item }}</Tag>
+      <Tag color="blue" style="margin-bottom: 10px" @click="itemClick">{{ item }}</Tag>
     </div>
   </Card>
 </template>

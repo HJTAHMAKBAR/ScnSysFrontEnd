@@ -1,7 +1,7 @@
 <template>
-  <Card title="涉及国家" :loading="loading">
+  <Card title="涉及组织" :loading="list.length === 0">
     <div v-for="(item, index) in list" :key="index">
-      <Tag color="orange" style="margin-bottom: 10px" @click="itemClick">{{ item }}</Tag>
+      <Tag color="red" style="margin-bottom: 10px" @click="itemClick">{{ item }}</Tag>
     </div>
   </Card>
 </template>
