@@ -1,7 +1,7 @@
 <template>
   <Card title="涉及人员" :loading="loading">
     <div v-for="(item, index) in list" :key="index">
-      <Tag color="orange" style="margin-bottom: 10px" @click="itemClick">{{ item }}</Tag>
+      <Tag color="orange" style="margin-bottom: 10px" @click="itemClick(item)">{{ item }}</Tag>
     </div>
   </Card>
 </template>
@@ -23,8 +23,7 @@
     },
     {},
   )
-  function itemClick() {
-    console.log('你好')
-    emitter.emit('entityClick', '你好')
+  function itemClick(item) {
+    emitter.emit('entityClick', item)
   }
 </script>

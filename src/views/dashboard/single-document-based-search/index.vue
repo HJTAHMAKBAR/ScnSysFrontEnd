@@ -19,9 +19,7 @@
     @ok="handleOk"
     @cancel="handleCancel"
   >
-    <p>Some contents...</p>
-    <p>Some contents...</p>
-    <p>Some contents...</p>
+    <SearchResult />
   </a-modal>
 </template>
 
@@ -33,6 +31,7 @@
   import { textExtract } from '/@/api/core/extract'
   import OrganizationInvolved from '/@/views/dashboard/single-document-based-search/components/OrganizationInvolved.vue'
   import LocationInvolved from '/@/views/dashboard/single-document-based-search/components/LocationInvolved.vue'
+  import SearchResult from '/@/views/dashboard/single-document-based-search/components/SearchResult.vue'
 
   const loading = ref(true)
   const visible = ref(false)
@@ -49,7 +48,6 @@
       personList.value = data.person
       organizationList.value = data.organization
       locationList.value = data.location
-      console.log(data)
     })
   })
 
@@ -66,22 +64,21 @@
     locationList.value = []
   })
 
-  emitter.on('entityClick', (event) => {
+  emitter.on('entityClick', (item) => {
     visible.value = true
-    console.log(event)
+    // 根据item类型进行搜索，返回数据，传递给SearchResult
+    console.log('indexItemClick', item)
   })
 
   onUnmounted(() => {
     emitter.off('textSearch')
   })
 
-  function handleOk(e) {
+  function handleOk() {
     visible.value = false
-    console.log(e)
   }
 
-  function handleCancel(e) {
+  function handleCancel() {
     visible.value = false
-    console.log(e)
   }
 </script>
