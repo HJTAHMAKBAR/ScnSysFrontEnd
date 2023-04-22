@@ -13,7 +13,7 @@
   </div>
   <a-modal
     title="查询结果"
-    width="100%"
+    width="90%"
     :visible="visible"
     wrap-class-name="full-modal"
     @ok="handleOk"
@@ -40,8 +40,6 @@
   const organizationList = ref([])
   const locationList = ref([])
   const searchResList = ref([])
-
-  personList.value.push('syronics')
 
   setTimeout(() => {
     loading.value = false
