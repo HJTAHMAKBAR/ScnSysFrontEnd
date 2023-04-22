@@ -19,7 +19,7 @@
     @ok="handleOk"
     @cancel="handleCancel"
   >
-    <SearchResult />
+    <SearchResult :list="searchResList" />
   </a-modal>
 </template>
 
@@ -29,6 +29,7 @@
   import PeopleInvolved from './components/PeopleInvolved.vue'
   import emitter from '/@/utils/bus'
   import { textExtract } from '/@/api/core/extract'
+  import { search } from '/@/api/core/search'
   import OrganizationInvolved from '/@/views/dashboard/single-document-based-search/components/OrganizationInvolved.vue'
   import LocationInvolved from '/@/views/dashboard/single-document-based-search/components/LocationInvolved.vue'
   import SearchResult from '/@/views/dashboard/single-document-based-search/components/SearchResult.vue'
@@ -38,6 +39,9 @@
   const personList = ref([])
   const organizationList = ref([])
   const locationList = ref([])
+  const searchResList = ref([])
+
+  personList.value.push('syronics')
 
   setTimeout(() => {
     loading.value = false
@@ -66,8 +70,12 @@
 
   emitter.on('entityClick', (item) => {
     visible.value = true
-    // 根据item类型进行搜索，返回数据，传递给SearchResult
-    console.log('indexItemClick', item)
+    const param = {
+      name: item,
+    }
+    search(param).then((data) => {
+      searchResList.value = data
+    })
   })
 
   onUnmounted(() => {
