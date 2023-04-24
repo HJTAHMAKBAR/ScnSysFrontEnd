@@ -37,10 +37,12 @@
   import type { UploadProps } from 'ant-design-vue'
   import { message, UploadChangeParam } from 'ant-design-vue'
   import emitter from '/@/utils/bus'
+  import { toRaw } from 'vue'
+  import { wordCloud } from '/@/api/core/mul'
 
   const previewVisible = ref(false)
   const previewTitle = ref('')
-  const mulFileInfo = ref([])
+  const mulEntityList = ref([])
 
   const fileList = ref<UploadProps['fileList']>([])
   function handleCancel() {
@@ -51,12 +53,16 @@
   function handleChange(info: UploadChangeParam) {
     const status = info.file.status
     if (status !== 'uploading') {
-      console.log(info.file, info.fileList)
+      // console.log(info.file, info.fileList)
     }
     if (status === 'done') {
       message.success(`${info.file.name} 文件上传成功.`)
-      mulFileInfo.value.push(info.file)
       emitter.emit('fileSearch', info.file.response.result)
+      const fileEntity = {
+        name: info.file.name,
+        list: info.file.response.result,
+      }
+      mulEntityList.value.push(fileEntity)
     } else if (status === 'error') {
       message.error(`${info.file.name} 文件上传失败.`)
     }
@@ -66,6 +72,10 @@
     console.log(e)
   }
   function handleBtnClick() {
-    console.log(mulFileInfo.value)
+    // console.log(mulFileInfo.value)
+    console.log(typeof toRaw(mulEntityList.value))
+    console.log('ok', toRaw(mulEntityList.value))
+    //1.统计词云
+    wordCloud(toRaw(mulEntityList.value))
   }
 </script>
