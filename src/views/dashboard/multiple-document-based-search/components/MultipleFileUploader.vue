@@ -1,13 +1,17 @@
 <template>
   <a-card>
-    <div>
+    <div class="clearfix">
       <a-upload
-        :file-list="fileList"
+        v-model:file-list="fileList"
+        name="singleDoc"
+        :multiple="true"
         list-type="picture-card"
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        @preview="handlePreview"
+        action="basic-api/doc/upload"
+        @change="handleChange"
+        @drop="handleDrop"
+        accept=".txt, .pdf, .doc, .docx"
       >
-        <div>
+        <div v-if="fileList.length < 4">
           <plus-outlined />
           <div style="margin-top: 8px">上传</div>
         </div>
@@ -21,6 +25,9 @@
         ok
       </a-modal>
     </div>
+    <a-button style="margin-top: 20px" type="primary" size="large" @click="handleBtnClick"
+      >一键检索</a-button
+    >
   </a-card>
 </template>
 
@@ -28,55 +35,37 @@
   import { PlusOutlined } from '@ant-design/icons-vue'
   import { ref } from 'vue'
   import type { UploadProps } from 'ant-design-vue'
+  import { message, UploadChangeParam } from 'ant-design-vue'
+  import emitter from '/@/utils/bus'
 
   const previewVisible = ref(false)
   const previewTitle = ref('')
+  const mulFileInfo = ref([])
 
-  const fileList = ref<UploadProps['fileList']>([
-    // {
-    //   uid: '-1',
-    //   name: 'a.txt',
-    //   status: 'done',
-    //   url: 'https://scn-sys-file.oss-cn-shanghai.aliyuncs.com/doc/a.txt',
-    // },
-    // {
-    //   uid: '-2',
-    //   name: 'a.pdf',
-    //   status: 'done',
-    //   url: 'https://scn-sys-file.oss-cn-shanghai.aliyuncs.com/doc/a.pdf',
-    // },
-    // {
-    //   uid: '-3',
-    //   name: 'a.docx',
-    //   status: 'done',
-    //   url: 'https://scn-sys-file.oss-cn-shanghai.aliyuncs.com/doc/a.docx',
-    // },
-    // {
-    //   uid: '-4',
-    //   name: 'a.doc',
-    //   status: 'done',
-    //   url: 'https://scn-sys-file.oss-cn-shanghai.aliyuncs.com/doc/a.doc',
-    // },
-  ])
-  function getBase64(file: File) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = () => resolve(reader.result)
-      reader.onerror = (error) => reject(error)
-    })
-  }
-
-  async function handlePreview(file: UploadProps['fileList'][number]) {
-    if (!file.url && !file.preview) {
-      file.pre = (await getBase64(file.originFileObj)) as string
-    }
-    previewVisible.value = true
-    previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf('/') + 1)
-  }
-
+  const fileList = ref<UploadProps['fileList']>([])
   function handleCancel() {
     previewVisible.value = false
     previewTitle.value = ''
+  }
+
+  function handleChange(info: UploadChangeParam) {
+    const status = info.file.status
+    if (status !== 'uploading') {
+      console.log(info.file, info.fileList)
+    }
+    if (status === 'done') {
+      message.success(`${info.file.name} 文件上传成功.`)
+      mulFileInfo.value.push(info.file)
+      emitter.emit('fileSearch', info.file.response.result)
+    } else if (status === 'error') {
+      message.error(`${info.file.name} 文件上传失败.`)
+    }
+  }
+
+  function handleDrop(e) {
+    console.log(e)
+  }
+  function handleBtnClick() {
+    console.log(mulFileInfo.value)
   }
 </script>

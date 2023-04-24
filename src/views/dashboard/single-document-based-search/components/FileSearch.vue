@@ -2,7 +2,7 @@
   <a-upload-dragger
     v-model:fileList="fileList"
     name="singleDoc"
-    :multiple="true"
+    :multiple="false"
     action="basic-api/doc/upload"
     @change="handleChange"
     @drop="handleDrop"
