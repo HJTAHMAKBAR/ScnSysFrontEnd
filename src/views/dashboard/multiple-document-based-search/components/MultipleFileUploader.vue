@@ -1,5 +1,5 @@
 <template>
-  <a-card>
+  <a-card title="多文档上传" class="!my-4 enter-y">
     <div class="clearfix">
       <a-upload
         v-model:file-list="fileList"
@@ -29,6 +29,9 @@
       >一键检索</a-button
     >
   </a-card>
+  <a-card title="词云分析" v-if="wordCountVisible">
+    <WordCount :list="wordCloudList" />
+  </a-card>
 </template>
 
 <script lang="ts" setup>
@@ -39,10 +42,13 @@
   import emitter from '/@/utils/bus'
   import { toRaw } from 'vue'
   import { wordCloud } from '/@/api/core/mul'
+  import WordCount from '/@/views/dashboard/multiple-document-based-search/components/WordCount.vue'
 
   const previewVisible = ref(false)
+  const wordCountVisible = ref(false)
   const previewTitle = ref('')
   const mulEntityList = ref([])
+  const wordCloudList = ref([])
 
   const fileList = ref<UploadProps['fileList']>([])
   function handleCancel() {
@@ -73,9 +79,11 @@
   }
   function handleBtnClick() {
     // console.log(mulFileInfo.value)
-    console.log(typeof toRaw(mulEntityList.value))
     console.log('ok', toRaw(mulEntityList.value))
     //1.统计词云
-    wordCloud(toRaw(mulEntityList.value))
+    wordCloud(toRaw(mulEntityList.value)).then((data) => {
+      wordCountVisible.value = true
+      wordCloudList.value = data
+    })
   }
 </script>

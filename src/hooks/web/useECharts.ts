@@ -8,6 +8,7 @@ import { useEventListener } from '/@/hooks/event/useEventListener'
 import { useBreakpoint } from '/@/hooks/event/useBreakpoint'
 import echarts from '/@/utils/lib/echarts'
 import { useRootSetting } from '/@/hooks/setting/useRootSetting'
+import 'echarts-wordcloud'
 
 export function useECharts(
   elRef: Ref<HTMLDivElement>,
