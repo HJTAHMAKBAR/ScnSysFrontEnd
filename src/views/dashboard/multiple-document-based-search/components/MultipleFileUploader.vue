@@ -29,8 +29,11 @@
       >一键检索</a-button
     >
   </a-card>
-  <a-card title="词云分析" v-if="wordCountVisible">
+  <a-card title="词云分析" v-if="wordCountVisible" class="!my-4 enter-y">
     <WordCount :list="wordCloudList" />
+  </a-card>
+  <a-card title="关系图谱" v-if="relationalGraphVisible" class="!my-4 enter-y">
+    <RelationalGraph />
   </a-card>
 </template>
 
@@ -43,9 +46,11 @@
   import { toRaw } from 'vue'
   import { wordCloud } from '/@/api/core/mul'
   import WordCount from '/@/views/dashboard/multiple-document-based-search/components/WordCount.vue'
+  import RelationalGraph from '/@/views/dashboard/multiple-document-based-search/components/RelationalGraph.vue'
 
   const previewVisible = ref(false)
   const wordCountVisible = ref(false)
+  const relationalGraphVisible = ref(false)
   const previewTitle = ref('')
   const mulEntityList = ref([])
   const wordCloudList = ref([])
@@ -78,12 +83,12 @@
     console.log(e)
   }
   function handleBtnClick() {
-    // console.log(mulFileInfo.value)
-    console.log('ok', toRaw(mulEntityList.value))
-    //1.统计词云
+    // 1.统计词云
     wordCloud(toRaw(mulEntityList.value)).then((data) => {
       wordCountVisible.value = true
       wordCloudList.value = data
     })
+    // 2.关联图谱
+    relationalGraphVisible.value = true
   }
 </script>

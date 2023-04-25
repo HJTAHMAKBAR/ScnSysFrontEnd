@@ -59,6 +59,7 @@
     "path-to-regexp": "^6.2.0",
     "pinia": "2.0.12",
     "qs": "^6.10.3",
+    "relation-graph": "^2.0.26",
     "resize-observer-polyfill": "^1.5.1",
     "showdown": "^2.1.0",
     "sortablejs": "^1.15.0",
