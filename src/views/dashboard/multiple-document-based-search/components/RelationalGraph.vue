@@ -1,24 +1,24 @@
 <template>
-  <div>
-    <div style="border: #efefef solid 1px; height: calc(100vh - 100px); width: 100%">
-      <relation-graph ref="relationGraph$" :options="options">
-        <template #node="{ node }">
-          <div style="padding-top: 20px">节点：{{ node.text }}</div>
-        </template>
-      </relation-graph>
-    </div>
+  <div style="height: calc(100vh - 200px); width: 100%">
+    <relation-graph ref="refGraph" :options="options">
+      <template #node="{ node }">
+        <div style="padding-top: 20px">节点：{{ node.text }}</div>
+      </template>
+    </relation-graph>
   </div>
 </template>
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue'
   import RelationGraph, { RGJsonData } from 'relation-graph/vue3'
-  const relationGraph$ = ref<RelationGraph>()
+  const refGraph = ref<RelationGraph>()
   const options = {
     defaultExpandHolderPosition: 'right',
-    // defaultLineShape: 4,
-    debug: true,
-    showDebugPanel: true,
+    defaultLineShape: 6,
+    debug: false,
+    showDebugPanel: false,
+    allowShowMiniToolBar: false,
+    // defaultNodeColor: '',
   }
   onMounted(() => {
     const graphJsonData: RGJsonData = {
@@ -40,7 +40,7 @@
         { from: 'N9', to: 'N4', text: '分享x' },
       ],
     }
-    relationGraph$.value.setJsonData(graphJsonData, () => {
+    refGraph.value.setJsonData(graphJsonData, () => {
       console.log('relationGraph ready!')
     })
   })
