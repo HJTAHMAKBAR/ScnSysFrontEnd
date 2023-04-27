@@ -78,6 +78,9 @@
 
   onUnmounted(() => {
     emitter.off('textSearch')
+    emitter.off('fileSearch')
+    emitter.off('clearList')
+    emitter.off('entityClick')
   })
 
   function handleOk() {

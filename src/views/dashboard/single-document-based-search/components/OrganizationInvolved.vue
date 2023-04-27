@@ -1,5 +1,6 @@
 <template>
-  <Card title="涉及组织" :loading="list.length === 0">
+  <Card title="涉及组织">
+    <a-empty v-if="list.length === 0" />
     <div v-for="(item, index) in list" :key="index">
       <Tag color="red" style="margin-bottom: 10px" @click="itemClick(item)">{{ item }}</Tag>
     </div>

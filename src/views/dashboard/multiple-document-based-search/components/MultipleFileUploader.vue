@@ -11,7 +11,7 @@
         @drop="handleDrop"
         accept=".txt, .pdf, .doc, .docx"
       >
-        <div v-if="fileList.length < 4">
+        <div v-if="fileList.length < 6">
           <plus-outlined />
           <div style="margin-top: 8px">上传</div>
         </div>
@@ -25,7 +25,12 @@
         ok
       </a-modal>
     </div>
-    <a-button style="margin-top: 20px" type="primary" size="large" @click="handleBtnClick"
+    <a-button
+      style="margin-top: 20px"
+      type="primary"
+      size="large"
+      @click="handleBtnClick"
+      v-if="fileList.length > 0"
       >一键检索</a-button
     >
   </a-card>
@@ -33,7 +38,7 @@
     <WordCount :list="wordCloudList" />
   </a-card>
   <a-card title="关系图谱" v-if="relationalGraphVisible" class="!my-4 enter-y">
-    <RelationalGraph />
+    <RelationalGraph :list="relationGraphData" />
   </a-card>
 </template>
 
@@ -44,7 +49,7 @@
   import { message, UploadChangeParam } from 'ant-design-vue'
   import emitter from '/@/utils/bus'
   import { toRaw } from 'vue'
-  import { wordCloud } from '/@/api/core/mul'
+  import { relationGraph, wordCloud } from '/@/api/core/mul'
   import WordCount from '/@/views/dashboard/multiple-document-based-search/components/WordCount.vue'
   import RelationalGraph from '/@/views/dashboard/multiple-document-based-search/components/RelationalGraph.vue'
 
@@ -52,8 +57,9 @@
   const wordCountVisible = ref(false)
   const relationalGraphVisible = ref(false)
   const previewTitle = ref('')
-  const mulEntityList = ref([])
+  const mulEntityList: any = ref([])
   const wordCloudList = ref([])
+  const relationGraphData = ref([])
 
   const fileList = ref<UploadProps['fileList']>([])
   function handleCancel() {
@@ -90,5 +96,8 @@
     })
     // 2.关联图谱
     relationalGraphVisible.value = true
+    relationGraph(toRaw(mulEntityList.value)).then((data) => {
+      relationGraphData.value = data
+    })
   }
 </script>

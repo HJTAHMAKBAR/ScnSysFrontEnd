@@ -2,46 +2,71 @@
   <div style="height: calc(100vh - 200px); width: 100%">
     <relation-graph ref="refGraph" :options="options">
       <template #node="{ node }">
-        <div style="padding-top: 20px">节点：{{ node.text }}</div>
+        <div style="padding-top: 20px" @click="showNodeTips(node.text)">{{ node.text }}</div>
       </template>
     </relation-graph>
   </div>
+  <a-modal
+    title="查询结果"
+    width="90%"
+    :visible="modalVisible"
+    wrap-class-name="full-modal"
+    @ok="handleOk"
+    @cancel="handleCancel"
+  >
+    <SearchResult :list="searchResList" />
+  </a-modal>
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue'
+  import { ref, watch } from 'vue'
   import RelationGraph, { RGJsonData } from 'relation-graph/vue3'
+  import { search } from '/@/api/core/search'
+  import SearchResult from '/@/views/dashboard/single-document-based-search/components/SearchResult.vue'
+
+  const modalVisible = ref(false)
+  const searchResList = ref([])
+
   const refGraph = ref<RelationGraph>()
+  const props = defineProps({
+    list: Array,
+  })
   const options = {
     defaultExpandHolderPosition: 'right',
-    defaultLineShape: 6,
+    defaultLineShape: 1,
     debug: false,
     showDebugPanel: false,
     allowShowMiniToolBar: false,
-    // defaultNodeColor: '',
   }
-  onMounted(() => {
-    const graphJsonData: RGJsonData = {
-      rootId: 'N3',
-      nodes: [
-        { id: 'N4', text: '十4' },
-        { id: 'N5', text: '十5' },
-        { id: 'N6', text: '十6' },
-        { id: 'N7', text: '十7' },
-        { id: 'N3', text: '十三' },
-        { id: 'N9', text: '152****3393' },
-      ],
-      lines: [
-        { from: 'N3', to: 'N9', text: '分享' },
-        { from: 'N3', to: 'N4', text: '分享444' },
-        { from: 'N3', to: 'N5', text: '分享555' },
-        { from: 'N3', to: 'N6', text: '分享666' },
-        { from: 'N3', to: 'N7', text: '分享777' },
-        { from: 'N9', to: 'N4', text: '分享x' },
-      ],
+  watch(
+    () => props.list,
+    () => {
+      const graphJsonData: RGJsonData = {
+        rootId: 'N3',
+        nodes: props.list.nodes,
+        lines: props.list.lines,
+      }
+      refGraph.value?.setJsonData(graphJsonData, () => {
+        console.log('relationGraph ready!')
+      })
+    },
+  )
+
+  function showNodeTips(item) {
+    const param = {
+      name: item,
     }
-    refGraph.value.setJsonData(graphJsonData, () => {
-      console.log('relationGraph ready!')
+    search(param).then((data) => {
+      searchResList.value = data
     })
-  })
+    modalVisible.value = true
+  }
+
+  function handleOk() {
+    modalVisible.value = false
+  }
+
+  function handleCancel() {
+    modalVisible.value = false
+  }
 </script>
