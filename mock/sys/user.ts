@@ -6,8 +6,9 @@ export function createFakeUserList() {
     {
       userId: '1',
       username: 'vben',
-      realName: 'Vben Admin',
-      avatar: 'https://q1.qlogo.cn/g?b=qq&nk=190848757&s=640',
+      realName: 'admin',
+      avatar:
+        'https://jett-image-host.oss-cn-shanghai.aliyuncs.com/img/QQ%E5%9B%BE%E7%89%8720230509132412.jpg',
       desc: 'manager',
       password: '123456',
       token: 'fakeToken1',
